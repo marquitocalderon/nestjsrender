@@ -18,24 +18,24 @@ export class UsuariosService {
     ) {}
 
     obtenerTodosLosUsuarios(){
-        return this.usuarioRepository.find({
-            // el select es para mandar los campos que quieres en mi caso password no quiero enviar
-            select:["id_usuario","usuario", "imagen", "estado_usuario","perfiles" ],
-            order:{
-                id_usuario: 'DESC',
-            },
-            where:{
-                estado_usuario: true
-            }
-        })
-    }
+      return this.usuarioRepository.find({
+          select: ["id_usuario", "usuario", "imagen", "estado_usuario", "perfiles"],
+          order: {
+              id_usuario: 'DESC',
+          },
+          where: {
+              estado_usuario: true
+          },
+      });
+  } 
+  
     async obtenerPorID(id: number) {
       const usuarioEncontrado = await this.usuarioRepository.findOne({
           where: {
               id_usuario: id,
               estado_usuario: true,
           },
-          select: ["id_usuario", "usuario", "estado_usuario","perfiles"], // Lista de campos que deseas seleccionar
+          select: ["id_usuario", "usuario","imagen","estado_usuario","perfiles"], // Lista de campos que deseas seleccionar
       });
   
       if (!usuarioEncontrado) {
