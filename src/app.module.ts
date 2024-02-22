@@ -3,6 +3,7 @@ import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { PerfilesModule } from './perfiles/perfiles.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 
 @Module({
@@ -31,6 +32,7 @@ import { UsuariosModule } from './usuarios/usuarios.module';
     }),
     PerfilesModule,
     UsuariosModule,
+    CloudinaryModule,
   ],
   controllers: [],
   providers: [],

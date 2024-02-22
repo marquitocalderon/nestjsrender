@@ -18,8 +18,10 @@ export class CrearUsuarioDto {
     password: string;
 
     @IsNotEmpty({ message: 'El idperfil no debe estar vacío' })
-    @IsInt({message: "el campo idperfil solo acepta datos number y numeros enteros"})
-    idperfil:number
+    @IsString({message: "el campo idperfil DEBE MANDARSE EN STRING"})
+    @MinLength(1 , {message: 'El campo password debe 1 caracteres como minimo'})
+    @MaxLength(100 , {message: 'El campo password debe 100 caracteres como maximo'})
+    idperfil:string
 
 
 }
