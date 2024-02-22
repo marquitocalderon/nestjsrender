@@ -25,7 +25,7 @@ export class PerfilesController {
     }
 
     @Patch(':id')
-    actulizarPerfil(@Param('id', ParseIntPipe) id:number, @Body() datosDelFronted: UpdatePerfilDTO ){
+    actualizarPerfil(@Param('id', ParseIntPipe) id:number, @Body() datosDelFronted: UpdatePerfilDTO ){
         return this.perfilService.actualizarPerfil(id, datosDelFronted)
     }
 
