@@ -7,6 +7,7 @@ import { PerfilesEntity } from './perfiles.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([PerfilesEntity])],
   controllers: [PerfilesController],
-  providers: [PerfilesService]
+  providers: [PerfilesService],
+  exports: [PerfilesService]
 })
 export class PerfilesModule {}
