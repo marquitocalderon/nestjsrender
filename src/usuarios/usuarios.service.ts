@@ -19,6 +19,8 @@ export class UsuariosService {
 
     obtenerTodosLosUsuarios(){
         return this.usuarioRepository.find({
+            // el select es para mandar los campos que quieres en mi caso password no quiero enviar
+            select:["id_usuario","usuario", "imagen", "estado_usuario","perfiles" ],
             order:{
                 id_usuario: 'DESC',
             },
@@ -27,23 +29,29 @@ export class UsuariosService {
             }
         })
     }
-
     async obtenerPorID(id: number) {
-        const usuarioEncontrado = await this.usuarioRepository.findOneBy({
-          id_usuario: id,
-          estado_usuario: true
-        });
-    
-        if (!usuarioEncontrado) {
-          return new HttpException('USUARIO no encontrado', HttpStatus.NOT_FOUND);
-        }
-    
-        if (!usuarioEncontrado.estado_usuario) {
-          return new HttpException('USUARIO Eliminado', HttpStatus.NOT_FOUND);
-        }
-    
-        return usuarioEncontrado;
-     } 
+      const usuarioEncontrado = await this.usuarioRepository.findOne({
+          where: {
+              id_usuario: id,
+              estado_usuario: true,
+          },
+          select: ["id_usuario", "usuario", "estado_usuario","perfiles"], // Lista de campos que deseas seleccionar
+      });
+  
+      if (!usuarioEncontrado) {
+          throw new HttpException('USUARIO no encontrado', HttpStatus.NOT_FOUND);
+      }
+  
+      if (!usuarioEncontrado.estado_usuario) {
+          throw new HttpException('USUARIO Eliminado', HttpStatus.NOT_FOUND);
+      }
+  
+      return usuarioEncontrado;
+  }
+  
+
+
+
      async crearUsuario(usuarioFronted: CrearUsuarioDto, imagen: Express.Multer.File){
 
       const perfilEncontrado = await this.perfilRepository.findOneBy({
