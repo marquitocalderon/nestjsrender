@@ -16,6 +16,7 @@ export class AuthController {
         return this.authService.login(datosFronted)
     }
 
+    @UseGuards(AuthGuard, RolesGuard)
     @Post('refresh')
     refreshToken(@Body() datosFronted: RefreshTokenDTO) {
         return this.authService.generarToken_Con_REFRESH_TOKEN(datosFronted)
