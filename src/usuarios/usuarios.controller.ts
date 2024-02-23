@@ -3,9 +3,13 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { UsuariosService } from './usuarios.service';
 import { CrearUsuarioDto, UpdateUsuarioDto } from './dto/usuarios.dto';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { PermisoPara } from 'src/auth/decorators/roles.decorator';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Role } from 'src/auth/enums/role.enum';
+import { AUTENTICACION_PARA_EL } from 'src/auth/decorators/auth.decorator';
 
 @Controller('usuarios')
-@UseGuards(AuthGuard)
+@AUTENTICACION_PARA_EL(Role.ADMIN)
 export class UsuariosController {
 
     constructor(private usuarioService: UsuariosService) { }
