@@ -4,7 +4,7 @@ import {
   Injectable,
   UnauthorizedException,
 } from "@nestjs/common";
-import { JwtService } from "@nestjs/jwt";
+import { JwtService, TokenExpiredError } from "@nestjs/jwt";
 import { Request } from "express";
 
 
@@ -25,7 +25,12 @@ export class AuthGuard implements CanActivate {
         secret: process.env.ACCESS_TOKEN,
       });
     } catch (error) {
-      throw new UnauthorizedException();
+      if (error instanceof TokenExpiredError) {
+        // Manejar el error específico de token expirado
+        throw new UnauthorizedException('Token vencido');
+    }
+    // Manejar el error de verificación del refresh token
+    throw new UnauthorizedException('Token no válido');
     }
 
     return true;

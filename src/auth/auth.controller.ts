@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
-import { LoginDto } from './dto/login.dto';
+import { LoginDto, RefreshTokenDTO } from './dto/login.dto';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 
@@ -13,10 +13,11 @@ export class AuthController {
         return this.authService.login(datosFronted)
     }
 
-    @Get('profile')
-    @UseGuards(AuthGuard)
-    profile(@Request() req) {
-        return req.user;
+    @Post('refresh')
+    refreshToken(@Body() datosFronted: RefreshTokenDTO) {
+       return this.authService.generarToken_Con_REFRESH_TOKEN(datosFronted)
     }
+
+    
 
 }

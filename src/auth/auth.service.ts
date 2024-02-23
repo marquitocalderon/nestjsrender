@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsuariosService } from 'src/usuarios/usuarios.service';
-import { LoginDto } from './dto/login.dto';
+import { LoginDto, RefreshTokenDTO } from './dto/login.dto';
 import * as bcryptjs from 'bcryptjs'
-import { JwtService } from '@nestjs/jwt';
+import { JwtService, TokenExpiredError } from '@nestjs/jwt';
 
 
 // PARA USUAR JWT TOKEN SE INSTALA ESTO
@@ -46,6 +46,37 @@ export class AuthService {
             refreshToken: refreshToken,
         };
     }
+
+    async generarToken_Con_REFRESH_TOKEN(datoRecibido: RefreshTokenDTO): Promise<string> {
+        try {
+            // Verificar si el refresh token es válido
+            const payload = await this.jwtService.verifyAsync(datoRecibido.refresh_token, {
+                secret: process.env.REFRESH_TOKEN,
+            });
+    
+            // Obtener el usuario asociado al refresh token (si es necesario)
+            const usuario = await this.usuarioService.obtenerPorID(payload.sub);
+    
+            // Crear un nuevo token de acceso con los mismos datos del usuario
+            const nuevoAccessToken = await this.jwtService.signAsync({
+                sub: usuario.id_usuario,
+                username: usuario.usuario,
+            }, {
+                secret: process.env.ACCESS_TOKEN,
+                expiresIn: 60 * 60, // Otra duración según tus necesidades
+            });
+    
+            return nuevoAccessToken;
+        } catch (error) {
+            if (error instanceof TokenExpiredError) {
+                // Manejar el error específico de token expirado
+                throw new UnauthorizedException('Refresh token vencido');
+            }
+            // Manejar el error de verificación del refresh token
+            throw new UnauthorizedException('Refresh token no válido');
+        }
+    }
+    
     
 
 

@@ -17,3 +17,9 @@ export class LoginDto {
     @MaxLength(16 , {message: 'El campo password debe 16 caracteres como maximo'})
     password: string;
 }
+
+export class RefreshTokenDTO{
+    @IsNotEmpty({ message: 'El campo refresh_token no debe estar vacío' })
+    @IsString({ message: 'El campo refresh_token tiene que ser una cadena de caracteres' })
+    refresh_token: string;
+}
