@@ -29,7 +29,7 @@ export class AuthService {
             throw new UnauthorizedException('Password Incorrecto');
         }
     
-        const payload = { sub: usuario.id_usuario, username: usuario.usuario };
+        const payload = { sub: usuario.id_usuario, username: usuario.usuario, role: usuario.perfiles.nombre_perfil };
     
         const accessToken = await this.jwtService.signAsync(payload, {
             secret: process.env.ACCESS_TOKEN,
@@ -61,6 +61,7 @@ export class AuthService {
             const nuevoAccessToken = await this.jwtService.signAsync({
                 sub: usuario.id_usuario,
                 username: usuario.usuario,
+                role: usuario.perfiles.nombre_perfil
             }, {
                 secret: process.env.ACCESS_TOKEN,
                 expiresIn: 60 * 60, // Otra duración según tus necesidades

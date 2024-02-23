@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Param, ParseIntPipe,Patch, Delete, UseGuards } from '@nestjs/common';
 import { CrearPerfilDto, UpdatePerfilDTO } from './dto/perfiles.dto';
 import { PerfilesService } from './perfiles.service';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
 
 @Controller('perfiles')
 @UseGuards(AuthGuard)
