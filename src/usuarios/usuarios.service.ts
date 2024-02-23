@@ -5,7 +5,6 @@ import { UsuariosEntity } from './usuarios.entity';
 import { PerfilesEntity } from 'src/perfiles/perfiles.entity';
 import { CrearUsuarioDto, UpdateUsuarioDto } from './dto/usuarios.dto';
 import * as bcryptjs from 'bcryptjs'
-import { v2 } from 'cloudinary';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 // Asegúrate de importar tu entidad PerfilesEntity
 
@@ -28,6 +27,18 @@ export class UsuariosService {
       },
     });
   }
+
+  
+  buscarParaLogin(usuario: string) {
+    return this.usuarioRepository.findOne({
+      where: {
+        usuario: usuario,
+      },
+    });
+  }
+
+
+  
 
   async obtenerPorID(id: number) {
     const usuarioEncontrado = await this.usuarioRepository.findOne({

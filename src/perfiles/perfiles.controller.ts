@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Post, Param, ParseIntPipe,Patch, Delete } from '@nestjs/common';
+import { Body, Controller, Get, Post, Param, ParseIntPipe,Patch, Delete, UseGuards } from '@nestjs/common';
 import { CrearPerfilDto, UpdatePerfilDTO } from './dto/perfiles.dto';
 import { PerfilesService } from './perfiles.service';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('perfiles')
+@UseGuards(AuthGuard)
 export class PerfilesController {
 
     constructor(private perfilService: PerfilesService){}

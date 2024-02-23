@@ -1,9 +1,11 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UsuariosService } from './usuarios.service';
 import { CrearUsuarioDto, UpdateUsuarioDto } from './dto/usuarios.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('usuarios')
+@UseGuards(AuthGuard)
 export class UsuariosController {
 
     constructor(private usuarioService: UsuariosService) { }
