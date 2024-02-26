@@ -10,7 +10,7 @@ export class UsuariosEntity {
     @Column({ length: 16 , unique: true}) // Especifica la longitud máxima de la columna usuario
     usuario: string;
 
-    @Column() // Especifica la longitud máxima de la columna password
+    @Column({select: false}) // Especifica la longitud máxima de la columna password
     password: string;
 
     @Column({nullable: true}) // Especifica la longitud máxima de la columna password

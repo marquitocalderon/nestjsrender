@@ -18,7 +18,6 @@ export class UsuariosService {
 
   obtenerTodosLosUsuarios() {
     return this.usuarioRepository.find({
-      select: ["id_usuario", "usuario", "imagen", "estado_usuario", "perfiles"],
       order: {
         id_usuario: 'DESC',
       },
@@ -34,6 +33,7 @@ export class UsuariosService {
       where: {
         usuario: usuario,
       },
+      select:["id_usuario","usuario","password","perfiles"]
     });
   }
 
