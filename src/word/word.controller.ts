@@ -7,6 +7,12 @@ export class WordController {
     
     constructor(private wordService: WordService){}
 
+
+    @Get()
+    holaword(){
+        return "hola mundo"
+    }
+
     @Post()
     generarWord(@Body() datosDelFrontend: GenerarWordDto){
         return this.wordService.generateWord(datosDelFrontend)
