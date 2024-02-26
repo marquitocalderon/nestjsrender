@@ -5,7 +5,10 @@ import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { PermisoPara } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags("PERFILES")
 @Controller('perfiles')
 @UseGuards(AuthGuard, RolesGuard)
 export class PerfilesController {

@@ -7,7 +7,10 @@ import { PermisoPara } from 'src/auth/decorators/roles.decorator';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Role } from 'src/auth/enums/role.enum';
 import { AUTENTICACION_PARA_EL } from 'src/auth/decorators/auth.decorator';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags("USUARIOS")
 @Controller('usuarios')
 @AUTENTICACION_PARA_EL(Role.ADMIN)
 export class UsuariosController {
