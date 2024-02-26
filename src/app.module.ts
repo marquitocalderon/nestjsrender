@@ -5,6 +5,7 @@ import { PerfilesModule } from './perfiles/perfiles.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { AuthModule } from './auth/auth.module';
+import { WordModule } from './word/word.module';
 
 
 @Module({
@@ -35,6 +36,7 @@ import { AuthModule } from './auth/auth.module';
     UsuariosModule,
     CloudinaryModule,
     AuthModule,
+    WordModule,
   ],
   controllers: [],
   providers: [],
