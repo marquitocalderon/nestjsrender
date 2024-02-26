@@ -10,7 +10,7 @@ export class WordController {
 
     @Get()
     holaword(){
-        return "hola mundo"
+        return "hola estoy compilando"
     }
 
     @Post()
