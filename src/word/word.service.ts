@@ -24,7 +24,7 @@ export class WordService {
             'binary'
         );
 
-        console.log(content);
+        console.log(content, "hola bb");
     }
 
 
